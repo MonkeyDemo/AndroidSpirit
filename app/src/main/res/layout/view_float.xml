@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btn_start"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic on_start"
+            app:layout_constraintEnd_toStartOf="@+id/btn_exit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_exit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_exit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_home"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_more"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_start" />
+
+        <ImageView
+            android:id="@+id/btn_more"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_exit" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

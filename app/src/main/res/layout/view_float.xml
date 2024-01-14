@@ -14,7 +14,7 @@
             android:id="@+id/btn_start"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/ic on_start"
+            android:src="@drawable/icon_start"
             app:layout_constraintEnd_toStartOf="@+id/btn_exit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

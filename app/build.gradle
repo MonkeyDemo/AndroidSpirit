@@ -72,4 +72,7 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'com.github.yhaolpz:FloatWindow:1.0.9'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'com.github.getActivity:Toaster:12.6'
+    implementation 'org.greenrobot:eventbus:3.3.1'
 }

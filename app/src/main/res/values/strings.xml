@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AndroidSpirit</string>
+    <string name="accessibility_service_label">看书助手</string>
 </resources>

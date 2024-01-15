@@ -16,6 +16,7 @@ import com.monkeydemo.androidspirit.base.ClickEvent
 import com.monkeydemo.androidspirit.base.MessageEvent
 import com.monkeydemo.androidspirit.databinding.ActivityMainBinding
 import com.monkeydemo.androidspirit.databinding.ViewFloatBinding
+import com.monkeydemo.androidspirit.floatwindow.FloatService
 import com.yhao.floatwindow.FloatWindow
 import com.yhao.floatwindow.MoveType
 import com.yhao.floatwindow.PermissionListener
@@ -36,56 +37,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ViewStateListener, Per
         const val TAG = "MainActivity"
     }
 
-    val flow by lazy {
-        flow<MessageEvent> {
-            val random = Random()
-            while (true){
-                //阅读时间
-                var duration = random.nextInt(3000)
-                duration+=1000
-                delay(duration.toLong())
-                emit(getClickEvent())
-            }
-        }
-    }
-
-    var mIsStop: Boolean = true
     val mScreen: Rect = Rect()
-    var mJob:Job? = null
     override fun initData(savedInstanceState: Bundle?) {
         val view = ViewFloatBinding.inflate(LayoutInflater.from(applicationContext), null, false)
-        FloatWindow
-            .with(getApplicationContext())
-            .setTag("global")
-            .setView(view.root)
-            .setX(100) //设置控件初始位置
-            .setY(Screen.height, 0.3f)
-            .setDesktopShow(true)                        //桌面显示
-            .setViewStateListener(this)    //监听悬浮控件状态改变
-            .setPermissionListener(this)  //监听权限申请结果
-            .setMoveType(MoveType.slide)
-            .setMoveStyle(500, AccelerateInterpolator())  //贴边动画时长为500ms，加速插值器
-            .build()
-        FloatWindow.get("global").view.setOnClickListener {
-            mIsStop = !mIsStop
-            if (mIsStop) {
-                //停止翻页
-                mJob?.cancel()
-                mJob = null
-            } else {
-                if (mJob!=null){
-                    mJob?.start()
-                }else{
-                    mJob = lifecycleScope.launch {
-                        flow.collect {
-                            EventBus.getDefault().post(it)
-                        }
-                    }
-                }
-            }
-        }
         initScreenInfo()
-        val intent = Intent(this, MyAccessibilityService::class.java)
+        val intent = Intent(this,FloatService::class.java)
+        intent.putExtra("screenInfo",mScreen)
         startService(intent)
         if (isAccessibilitySettingsOn(this).not()) {
             val intent = Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
@@ -93,16 +50,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), ViewStateListener, Per
         }
     }
 
-    fun getClickEvent(): ClickEvent {
-        val random = Random()
-        var rawX = random.nextInt(mScreen.width() / 2)
-        var rawY = random.nextInt((mScreen.height() * 0.2).toInt())
-        rawX += mScreen.width() / 2 + 40
-        rawY += mScreen.height() / 2 + 10
-        val dealX = (mScreen.width() - 40).coerceAtMost(rawX)
-        val dealY = rawY
-        return ClickEvent(dealX, dealY, mScreen)
-    }
 
     fun initScreenInfo() {
         val dm: DisplayMetrics //屏幕分辨率容器

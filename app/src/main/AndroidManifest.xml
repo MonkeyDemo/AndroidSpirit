@@ -5,16 +5,20 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:name=".base.BaseApplication"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidSpirit"
         tools:targetApi="31">
+        <service
+            android:name=".floatwindow.FloatService"
+            android:enabled="true"
+            android:exported="true"></service>
         <service
             android:name=".MyAccessibilityService"
             android:exported="true"
@@ -49,7 +53,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AndroidSpirit"></activity>
+            android:theme="@style/Theme.AndroidSpirit" />
     </application>
 
 </manifest>
